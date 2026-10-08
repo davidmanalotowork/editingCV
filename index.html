@@ -4,23 +4,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The <title> becomes the default PDF file name. Change it to: Lastname_Firstname_Resume -->
-<title>Dela_Cruz_Juan_Resume</title>
-<meta name="description" content="Resume of Juan Dela Cruz, Business Analyst, Metro Manila, Philippines">
+<title>David Manaloto - Resume</title>
+<meta name="description" content="Resume of David Manaloto, fresh graduate, BS Information Technology, Dagupan City, Philippines">
 
 <style>
   /* =========================================================
      HARVARD-STYLE RESUME  |  single column, ATS / AI friendly
-     - Paper size: A4. For US Letter / PH "short bond" (8.5 x 11 in),
-       change the @page size below to: size: letter;
+     FIXED A4 PAGE (210 x 297 mm), same on screen and in print.
+     Print from the browser: Ctrl/Cmd + P, Destination "Save as PDF",
+     Paper size A4, Margins "None" (or Default), Scale 100%,
+     turn OFF "Headers and footers", turn ON "Background graphics".
      ========================================================= */
 
   :root {
     --ink: #000000;
-    --muted: #333333;
     --rule: #000000;
     --paper: #ffffff;
     --desk: #e9e9e6;
     --font: "Times New Roman", Times, "Liberation Serif", Georgia, serif;
+
+    /* Page geometry: the inner padding acts as the page margin */
+    --page-w: 210mm;
+    --page-h: 297mm;
+    --pad-y: 11mm;
+    --pad-x: 16mm;
   }
 
   * { box-sizing: border-box; }
@@ -29,6 +36,7 @@
 
   body {
     margin: 0;
+    padding: 24px 0;
     font-family: var(--font);
     color: var(--ink);
     font-size: 10.5pt;
@@ -36,46 +44,16 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ---------- Screen-only toolbar ---------- */
-  .toolbar {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 10px 16px;
-    background: #1f2a37;
-    color: #f3f4f6;
-    font: 14px/1.3 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  }
-  .toolbar button {
-    font: inherit;
-    font-weight: 600;
-    padding: 7px 14px;
-    border: 1px solid #f3f4f6;
-    border-radius: 6px;
-    background: #f3f4f6;
-    color: #1f2a37;
-    cursor: pointer;
-  }
-  .toolbar button.secondary { background: transparent; color: #f3f4f6; }
-  .toolbar button:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
-  .toolbar span { opacity: .85; }
-
-  /* ---------- The page ---------- */
+  /* ---------- The page: always exactly A4 ---------- */
   .sheet {
-    width: 210mm;
-    min-height: 297mm;
-    margin: 24px auto;
-    padding: 15mm 17mm;
+    width: var(--page-w);
+    height: var(--page-h);
+    margin: 0 auto;
+    padding: var(--pad-y) var(--pad-x);
     background: var(--paper);
     box-shadow: 0 2px 14px rgba(0,0,0,.18);
+    overflow: hidden;           /* keeps the sheet a true single A4 page */
   }
-  .sheet:focus { outline: none; }
-  body.editing .sheet { outline: 2px dashed #3b82f6; outline-offset: 4px; }
 
   /* ---------- Header ---------- */
   header { text-align: center; margin-bottom: 8pt; }
@@ -91,7 +69,7 @@
   a { color: inherit; text-decoration: none; }
 
   /* ---------- Sections ---------- */
-  section { margin-top: 8pt; }
+  section { margin-top: 7pt; }
   h2 {
     margin: 0 0 4pt;
     padding-bottom: 1pt;
@@ -106,7 +84,7 @@
   .summary { margin: 0; text-align: justify; hyphens: auto; }
 
   /* Entry = two rows: (organisation, location) and (role, dates) */
-  .entry { margin-top: 5pt; break-inside: avoid; page-break-inside: avoid; }
+  .entry { margin-top: 5pt; }
   .entry:first-of-type { margin-top: 0; }
   .row {
     display: flex;
@@ -131,61 +109,51 @@
 
   /* ---------- PRINT / SAVE AS PDF ---------- */
   @page {
-    size: A4;            /* change to "letter" for short bond */
-    margin: 14mm 16mm;
+    size: A4;
+    margin: 0;                  /* margins come from .sheet padding instead */
   }
 
   @media print {
-    html, body { background: #fff !important; }
-    .toolbar { display: none !important; }
-    .sheet {
-      width: auto;
-      min-height: 0;
+    html, body {
+      width: var(--page-w);
+      height: var(--page-h);
       margin: 0;
       padding: 0;
-      box-shadow: none;
-      outline: none !important;
+      background: #fff;
     }
     body {
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
+    .sheet {
+      margin: 0;
+      height: 296.5mm;          /* a hair under 297mm avoids a blank 2nd page */
+      box-shadow: none;
+      break-after: avoid;
+      page-break-after: avoid;
+    }
     h2 { break-after: avoid; page-break-after: avoid; }
     li { break-inside: avoid; page-break-inside: avoid; }
     a { color: #000; }
-  }
-
-  /* ---------- Small screens (preview only) ---------- */
-  @media screen and (max-width: 820px) {
-    .sheet { width: auto; margin: 0; padding: 18px 16px; box-shadow: none; }
-    .row { flex-direction: column; gap: 0; }
-    .row .right { text-align: left; }
   }
 </style>
 </head>
 
 <body>
 
-<!-- Screen-only controls. Hidden automatically when printing. -->
-<div class="toolbar" role="toolbar" aria-label="Resume tools">
-  <button type="button" onclick="window.print()">Print / Save as PDF</button>
-  <button type="button" class="secondary" id="editToggle" aria-pressed="false">Edit text</button>
-  <span>In the print dialog: choose "Save as PDF", paper A4, margins Default, and turn off "Headers and footers".</span>
-</div>
-
 <main class="sheet" id="resume">
 
   <!-- ============ HEADER ============ -->
   <header>
-    <h1>Juan Dela Cruz</h1>
-    <p class="contact">Quezon City, Metro Manila, Philippines | +63 917 123 4567 | <a href="mailto:juan.delacruz@email.com">juan.delacruz@email.com</a></p>
-    <p class="contact">linkedin.com/in/juandelacruz | github.com/juandelacruz | juandelacruz.dev</p>
+    <h1>David Paul Manaloto</h1>
+    <p class="contact">Dagupan City, Pangasinan, Philippines | +63 981 448 8196 | <a href="mailto:davidmanalotowork@gmail.com">davidmanalotowork@gmail.com</a></p>
+    <p class="contact">linkedin.com/in/david-manaloto | github.com/davidmanaloto</p>
   </header>
 
   <!-- ============ PROFESSIONAL SUMMARY ============ -->
   <section aria-labelledby="h-summary">
     <h2 id="h-summary">Professional Summary</h2>
-    <p class="summary">Business Analyst with 4+ years of experience in banking and fintech in Metro Manila. Translates business requirements into data dashboards, process improvements, and product specifications using SQL, Power BI, and Agile delivery. Led a team of 5 analysts, reduced loan-processing turnaround by 32%, and supported regulatory reporting aligned with Bangko Sentral ng Pilipinas (BSP) requirements. Seeking a Senior Business Analyst role.</p>
+    <p class="summary">An Information Technology student and software developer with demonstrated proficiency in developing modern business solutions using up-to-date technologies and best practices. Experienced in web app development and skilled in Python, ReactJS / ReactNative, Unit Test, and REST API. Familiar With backend core technologies like PHP, MySQL, and PostgreSQL. Diligent, resolute, and can work independently but works best with a team where ideas are shared and tested. Advocates accessible and inclusive IT education through involvement with various IT communities.</p>
   </section>
 
   <!-- ============ EDUCATION ============ -->
@@ -194,162 +162,109 @@
 
     <div class="entry">
       <div class="row">
-        <span class="org">University of the Philippines Diliman</span>
-        <span class="right">Quezon City, Philippines</span>
+        <span class="org">PHINMA University</span>
+        <span class="right">Dagupan City, Pangasinan, Philippines</span>
       </div>
       <div class="row">
-        <span class="role">Bachelor of Science in Business Administration and Accountancy, cum laude</span>
-        <span class="right">Jun 2016 – Apr 2020</span>
+        <span class="role">Bachelor of Science in Information Technology</span>
+        <span class="right">2023 – 2027</span>
       </div>
-      <p class="detail"><b>GWA:</b> 1.50 (1.00 highest). <b>Honors:</b> University Scholar (2018–2019), Dean's Lister (6 semesters), DOST-SEI Undergraduate Scholarship. <b>Relevant coursework:</b> Business Analytics, Financial Management, Information Systems, Auditing.</p>
+      <p class="detail"><b>Relevant coursework:</b> Data Structures and Algorithms, Database Systems, Machine Learning, Software Design, Statistics, Human-Computer Interaction.</p>
     </div>
 
     <div class="entry">
       <div class="row">
-        <span class="org">Philippine Science High School – Main Campus</span>
-        <span class="right">Quezon City, Philippines</span>
+        <span class="org">PHINMA University</span>
+        <span class="right">Dagupan City, Pangasinan, Philippines</span>
       </div>
       <div class="row">
-        <span class="role">Secondary Education (Science and Technology Curriculum)</span>
-        <span class="right">Jun 2012 – Mar 2016</span>
+        <span class="role">Senior High School, STEM Strand</span>
+        <span class="right">2020 – 2022</span>
       </div>
     </div>
   </section>
 
-  <!-- ============ PROFESSIONAL EXPERIENCE ============ -->
-  <section aria-labelledby="h-experience">
-    <h2 id="h-experience">Professional Experience</h2>
+  <!-- ============ PROJECTS ============ -->
+  <section aria-labelledby="h-projects">
+    <h2 id="h-projects">Projects</h2>
 
     <div class="entry">
       <div class="row">
-        <span class="org">Sample Bank of the Philippines, Inc.</span>
-        <span class="right">Makati City, Philippines</span>
+        <span class="org">LifeX: Personal Health Identity &amp; Secure Record Platform (Capstone)</span>
+        <span class="right">2025 – 2026</span>
       </div>
       <div class="row">
-        <span class="role">Senior Business Analyst, Digital Lending</span>
-        <span class="right">Jan 2023 – Present</span>
+        <span class="role">Backend Developer, Researcher, and QA Engineer, 5-member team | React, Vite, Django, PostgreSQL</span>
       </div>
       <ul>
-        <li>Led requirements and UAT for a mobile loan-application platform serving 250,000+ customers, cutting loan-processing turnaround from 5 days to 3.4 days (32% faster).</li>
-        <li>Built Power BI dashboards from SQL data marts that reduced weekly reporting effort by 15 hours and gave executives real-time portfolio visibility.</li>
-        <li>Prepared BSP-aligned regulatory reports and data-privacy documentation compliant with the Data Privacy Act of 2012 (RA 10173), with zero audit findings in 2024.</li>
-        <li>Managed and mentored 5 analysts across 3 Agile squads, delivering 12 releases on schedule using Jira and Scrum.</li>
+        <li>A web based platform for managing personal health identities and secure medical records in the Philippines.</li>
+        <li>Streamlines the process of accessing and updating health information, ensuring data privacy and compliance compared to paper-based systems.</li>
       </ul>
     </div>
 
     <div class="entry">
       <div class="row">
-        <span class="org">Sample Fintech Solutions Corp.</span>
-        <span class="right">Taguig City, Philippines</span>
+        <span class="org">PULSAR: Rhythm game with blockchain integration</span>
+        <span class="right">2025</span>
       </div>
       <div class="row">
-        <span class="role">Business Analyst</span>
-        <span class="right">Jul 2020 – Dec 2022</span>
+        <span class="role">Lead Character Design, Lead Character Animator, QA | Unity, Clip Studio, Adobe Photoshop, Blockchain</span>
       </div>
       <ul>
-        <li>Analyzed 1M+ monthly e-wallet transactions in SQL and Python to identify drop-off points, increasing cash-in completion rate by 18%.</li>
-        <li>Wrote user stories, process maps, and acceptance criteria for 20+ features integrating GCash-style wallets, InstaPay, and PESONet payment rails.</li>
-        <li>Automated manual reconciliation in Excel VBA and Python, saving ₱1.2 million in annual operating costs.</li>
+        <li>Designed and animated characters.</li>
+        <li>Implemented blockchain technology for secure in-game asset purchase management.</li>
       </ul>
     </div>
 
     <div class="entry">
       <div class="row">
-        <span class="org">Sample Global Services Philippines, Inc.</span>
-        <span class="right">Ortigas Center, Pasig City, Philippines</span>
+        <span class="org">Reduce Readmission Prediction</span>
+        <span class="right">2024 – 2025</span>
       </div>
       <div class="row">
-        <span class="role">Operations Analyst Intern</span>
-        <span class="right">Jun 2019 – Aug 2019</span>
+        <span class="role">Backend Developer, ML Engineer, RAG Developer, Data Engineer | Python, FastAPI, Local LLM, LightRAG, RAGAS, ChromaDB</span>
       </div>
       <ul>
-        <li>Cleaned and analyzed customer-support data for a US client account, improving first-call resolution reporting accuracy by 12%.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============ LEADERSHIP & ACTIVITIES ============ -->
-  <section aria-labelledby="h-leadership">
-    <h2 id="h-leadership">Leadership and Community Involvement</h2>
-
-    <div class="entry">
-      <div class="row">
-        <span class="org">UP Junior Philippine Institute of Accountants (UP JPIA)</span>
-        <span class="right">Quezon City, Philippines</span>
-      </div>
-      <div class="row">
-        <span class="role">Vice President for Finance</span>
-        <span class="right">Jun 2018 – Mar 2019</span>
-      </div>
-      <ul>
-        <li>Managed a ₱850,000 annual budget and raised ₱300,000 in sponsorships for a nationwide accounting convention with 1,200 attendees.</li>
+        <li>Developed a machine learning model to predict patient readmissions, achieving 85% accuracy in identifying at-risk patients.</li>
+        <li>Able to read and process CSV and Excel files for data analysis and preprocessing.</li>
       </ul>
     </div>
 
     <div class="entry">
       <div class="row">
-        <span class="org">Gawad Kalinga</span>
-        <span class="right">Bulacan, Philippines</span>
+        <span class="org">Orbit: Building Management System with IoT Integration</span>
+        <span class="right">2024 – 2025</span>
       </div>
       <div class="row">
-        <span class="role">Volunteer, Financial Literacy Program</span>
-        <span class="right">Jan 2021 – Present</span>
+        <span class="role">Researcher, QA, AI Engineer, RAG Developer | Python, Django, Local LLM, Retrieval-Augmented Generation</span>
       </div>
       <ul>
-        <li>Teach budgeting and savings to 40+ families per year in partner communities; developed a bilingual (Filipino and English) workbook now used across 3 chapters.</li>
+        <li>Developed a building management system with IoT integration, allowing real-time monitoring and control of building systems using modified model running locally.</li>
       </ul>
     </div>
   </section>
 
-  <!-- ============ LICENSES & CERTIFICATIONS ============ -->
+  <!-- ============ CERTIFICATIONS ============ -->
   <section aria-labelledby="h-certs">
-    <h2 id="h-certs">Licenses and Certifications</h2>
+    <h2 id="h-certs">Certifications</h2>
     <ul>
-      <li>Certified Public Accountant (CPA), Professional Regulation Commission (PRC), License No. 0123456, issued Oct 2020</li>
-      <li>Civil Service Eligibility (Professional), Civil Service Commission, Philippines, Mar 2021</li>
-      <li>Certified Business Analysis Professional (CBAP), IIBA, 2024</li>
-      <li>Microsoft Certified: Power BI Data Analyst Associate (PL-300), 2023</li>
-      <li>TESDA National Certificate II in Bookkeeping, 2019</li>
+      <li>Certification of Completion, Cloud Services Fundamentals | AWS Fundamentals</li>
+      <li>Certification of Completion, CCNA Cisco Certified Network Associate</li>
+      <li>Certification of Completion, Python Fundamentals Freshman</li>
+      <li>Certification of Completion, Design Thinking Workshop</li>
     </ul>
   </section>
 
   <!-- ============ SKILLS ============ -->
   <section class="skills" aria-labelledby="h-skills">
-    <h2 id="h-skills">Skills, Tools, and Languages</h2>
-    <p><b>Business Analysis:</b> Requirements Gathering, User Stories, Process Mapping (BPMN), Stakeholder Management, UAT, Gap Analysis, Agile, Scrum, Kanban</p>
-    <p><b>Data and Analytics:</b> SQL (PostgreSQL, MySQL), Python (pandas, NumPy), Power BI, Tableau, Advanced Excel (VBA, Pivot Tables, Power Query), A/B Testing</p>
-    <p><b>Tools:</b> Jira, Confluence, Figma, Microsoft 365, Google Workspace, Git, Postman</p>
-    <p><b>Domain Knowledge:</b> Retail Banking, Digital Lending, E-Wallets, BSP Regulations, Data Privacy Act (RA 10173), Anti-Money Laundering (AML), KYC</p>
-    <p><b>Languages:</b> Filipino (Native), English (Professional Proficiency), Cebuano (Conversational)</p>
+    <h2 id="h-skills">Skills and Tools</h2>
+    <p><b>Programming:</b> Python, SQL, JavaScript, HTML, CSS</p>
+    <p><b>Data and Analytics:</b> pandas, NumPy, scikit-learn, Power BI, Tableau, Microsoft Excel (Pivot Tables, Power Query), Statistical Analysis, Data Visualization</p>
+    <p><b>Web and Tools:</b> React, Node.js, PostgreSQL, MySQL, Git, GitHub, Figma, Microsoft 365, Google Workspace</p>
+    <p><b>Soft Skills:</b> Teamwork, Leadership, Problem Solving, Public Speaking, Time Management, Written Communication</p>
   </section>
 
-  <!-- ============ OPTIONAL SECTIONS (copy a block above and edit) ============
-       - Awards: Dean's Lister, Employee of the Quarter, Hackathon placements
-       - Projects: name, one-line outcome, tech used, link
-       - Publications / Research: thesis title, journal, year
-       - Seminars and Trainings: title, organizer, year
-       NOTE: Leave out photo, age, birthdate, civil status, religion, and
-       government ID numbers. They are not needed and can add bias or risk.
-  -->
-
 </main>
-
-<script>
-  // Toggle in-browser editing of the resume text (screen only).
-  (function () {
-    var btn = document.getElementById('editToggle');
-    var sheet = document.getElementById('resume');
-    btn.addEventListener('click', function () {
-      var on = sheet.getAttribute('contenteditable') !== 'true';
-      sheet.setAttribute('contenteditable', on ? 'true' : 'false');
-      sheet.setAttribute('spellcheck', on ? 'true' : 'false');
-      document.body.classList.toggle('editing', on);
-      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-      btn.textContent = on ? 'Done editing' : 'Edit text';
-      if (on) sheet.focus();
-    });
-  })();
-</script>
 
 </body>
 </html>
