@@ -1,0 +1,35 @@
+.header-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+.box {
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+.contents {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* ◄ CHANGE TO COLUMN: Stacks the image on top, text on bottom */
+    align-items: center;      /* ◄ ADD THIS: Horizontally centers both the image and the text group */
+    gap: 20px;
+    width: 100%;
+}
+.contents img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #aaaaaa;
+    object-fit: cover;  
+    display: block;
+}
+.profile-text {
+    flex: 1;
+    text-align: right;
+}
