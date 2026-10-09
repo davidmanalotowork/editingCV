@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The <title> becomes the default PDF file name. Change it to: Lastname_Firstname_Resume -->
-<title>David Manaloto - Resume</title>
+<!-- The <title> becomes the default PDF file name: Lastname_Firstname_Resume -->
+<title>Manaloto_David_Resume</title>
 <meta name="description" content="Resume of David Manaloto, fresh graduate, BS Information Technology, Dagupan City, Philippines">
 
 <style>
@@ -74,14 +74,15 @@
     margin: 0 0 4pt;
     padding-bottom: 1pt;
     border-bottom: .75pt solid var(--rule);
-    font-size: 10.5pt;
+    font-size: 10pt;
     font-weight: 700;
-    font-variant: small-caps;
-    letter-spacing: .08em;
+    text-transform: uppercase;  /* real capitals: small-caps garbles ATS text extraction */
+    letter-spacing: .06em;
     line-height: 1.3;
   }
 
-  .summary { margin: 0; text-align: justify; hyphens: auto; }
+  /* left-aligned, no auto-hyphenation: keeps words whole for keyword scanners */
+  .summary { margin: 0; text-align: left; hyphens: none; }
 
   /* Entry = two rows: (organisation, location) and (role, dates) */
   .entry { margin-top: 5pt; }
@@ -150,10 +151,10 @@
     <p class="contact">linkedin.com/in/david-manaloto | github.com/davidmanaloto</p>
   </header>
 
-  <!-- ============ PERSONAL SUMMARY ============ -->
+  <!-- ============ PROFILE SUMMARY ============ -->
   <section aria-labelledby="h-summary">
     <h2 id="h-summary">Profile Summary</h2>
-    <p class="summary">An Information Technology student and software developer with demonstrated proficiency in developing modern business solutions using up-to-date technologies and best practices. Experienced in web app development and skilled in Python, ReactJS / ReactNative, and HTML. Familiar with backend core technologies like PHP, MySQL, and PostgreSQL. Diligent, resolute, and can work independently but works best with a team where ideas are shared and tested. Advocates accessible and inclusive IT education through involvement with various IT communities.</p>
+    <p class="summary">An Information Technology student and software developer with demonstrated proficiency in developing modern business solutions using up-to-date technologies and best practices. Experienced in web app development and skilled in Python, ReactJS / React Native, and HTML. Familiar with backend core technologies like PHP, MySQL, and PostgreSQL. Diligent, resolute, and can work independently but works best with a team where ideas are shared and tested. Advocates accessible and inclusive IT education through involvement with various IT communities.</p>
   </section>
 
   <!-- ============ EDUCATION ============ -->
@@ -198,7 +199,7 @@
       </div>
       <ul>
         <li>Built a web-based platform for managing personal health identities and secure medical records in the Philippines.</li>
-        <li>Streamlines the process of accessing and updating health information, ensuring data privacy and compliance compared to paper-based systems.</li>
+        <li>Streamlined access to and updating of health information, ensuring data privacy and compliance compared to paper-based systems.</li>
       </ul>
     </div>
 
@@ -208,7 +209,7 @@
         <span class="right">2025</span>
       </div>
       <div class="row">
-        <span class="role">Lead Character Design, Lead Character Animator, QA | Unity, Clip Studio, Adobe Photoshop, Blockchain</span>
+        <span class="role">Lead Character Designer, Lead Character Animator, QA | Unity, Clip Studio, Adobe Photoshop, Blockchain</span>
       </div>
       <ul>
         <li>Designed and animated characters.</li>
@@ -222,11 +223,11 @@
         <span class="right">2024 – 2025</span>
       </div>
       <div class="row">
-        <span class="role">ML Developer, RAG Developer, Data Analysis | Python, FastAPI, Local LLM, RAG, RAGAS, ChromaDB, Power BI, Tableau, pandas, NumPy, scikit-learn</span>
+        <span class="role">ML Developer, RAG Developer, Data Analyst | Python, FastAPI, Local LLM, RAG, RAGAS, ChromaDB, Power BI, Tableau, pandas, NumPy, scikit-learn</span>
       </div>
       <ul>
         <li>Trained a machine learning model to predict patient readmissions.</li>
-        <li>Achieving 85% accuracy in identifying at-risk patients based on historical data.</li>
+        <li>Achieved 85% accuracy in identifying at-risk patients based on historical data.</li>
       </ul>
     </div>
 
@@ -239,7 +240,7 @@
         <span class="role">Researcher, QA, AI Developer, RAG Developer | Python, Django, Ollama, LangChain, Retrieval-Augmented Generation</span>
       </div>
       <ul>
-        <li>Developed a building management system with IoT integration, allowing real-time monitoring and control of building systems using a locally run model deepseek.</li>
+        <li>Developed a building management system with IoT integration, allowing real-time monitoring and control of building systems using a locally run DeepSeek model.</li>
       </ul>
     </div>
   </section>
@@ -248,9 +249,9 @@
   <section aria-labelledby="h-certs">
     <h2 id="h-certs">Certifications</h2>
     <ul>
-      <li>Certificate of Coursework Completion, Cloud Services Fundamentals | AWS Fundamentals | Zuitt</li>
-      <li>Certificate of Coursework Completion, CCNA Cisco Certified Network Associate</li>
-      <li>Certificate of Coursework Completion, Python Fundamentals Freshman</li>
+      <li>Certificate of Coursework Completion, Cloud Services Fundamentals | AWS Fundamentals | Zuitt | 2025</li>
+      <li>Certificate of Coursework Completion, CCNA Cisco Certified Network Associate | UPANG | 2024</li>
+      <li>Certificate of Coursework Completion, Python Fundamentals Freshman | UPANG | 2023</li>
     </ul>
   </section>
 
@@ -259,7 +260,7 @@
     <h2 id="h-skills">Skills and Tools</h2>
     <p><b>Programming:</b> Python, SQL, JavaScript, HTML, CSS</p>
     <p><b>Data and Analytics:</b> pandas, NumPy, scikit-learn, Power BI, Tableau, Microsoft Excel, Statistical Analysis, Data Visualization</p>
-    <p><b>Web and Tools:</b> React, Node.js, Django, Unity, PHP, PostgreSQL, MySQL, Git, GitHub, Figma, Ollama, LangChain Microsoft 365, Google Workspace</p>
+    <p><b>Web and Tools:</b> React, React Native, Node.js, Django, FastAPI, Unity, PHP, PostgreSQL, MySQL, Git, GitHub, Figma, Ollama, LangChain, Microsoft 365, Google Workspace</p>
     <p><b>Soft Skills:</b> Teamwork, Leadership, Problem Solving, Public Speaking, Time Management, Written Communication</p>
   </section>
 
