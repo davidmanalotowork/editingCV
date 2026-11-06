@@ -3,17 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The <title> becomes the default PDF file name: Lastname_Firstname_Resume -->
+<!-- The <title> becomes the default PDF file name -->
 <title>Manaloto_David_Resume</title>
-<meta name="description" content="Resume of David Manaloto, fresh graduate, BS Information Technology, Dagupan City, Philippines">
+<meta name="description" content="Resume of David Paul Manaloto, BS Information Technology student (expected April 2027), Dagupan City, Philippines">
 
 <style>
   /* =========================================================
      HARVARD-STYLE RESUME  |  single column, ATS / AI friendly
      FIXED A4 PAGE (210 x 297 mm), same on screen and in print.
-     Print from the browser: Ctrl/Cmd + P, Destination "Save as PDF",
-     Paper size A4, Margins "None" (or Default), Scale 100%,
-     turn OFF "Headers and footers", turn ON "Background graphics".
+     Print: Ctrl/Cmd + P, Destination "Save as PDF", Paper size A4,
+     Margins "None", Scale 100%, "Headers and footers" OFF,
+     "Background graphics" ON.
+
+     The page is a flex column: any spare height is shared evenly
+     between the sections, so the content fills the A4 sheet
+     instead of being squeezed at the top.
+     If the bottom is ever cut off, lower --fs by 0.25pt.
      ========================================================= */
 
   :root {
@@ -23,10 +28,12 @@
     --desk: #e9e9e6;
     --font: "Times New Roman", Times, "Liberation Serif", Georgia, serif;
 
-    /* Page geometry: the inner padding acts as the page margin */
+    --fs: 10.5pt;             /* base font size */
+    --lh: 1.26;               /* base line height */
+
     --page-w: 210mm;
     --page-h: 297mm;
-    --pad-y: 11mm;
+    --pad-y: 12mm;
     --pad-x: 16mm;
   }
 
@@ -39,8 +46,8 @@
     padding: 24px 0;
     font-family: var(--font);
     color: var(--ink);
-    font-size: 10.5pt;
-    line-height: 1.32;
+    font-size: var(--fs);
+    line-height: var(--lh);
     -webkit-font-smoothing: antialiased;
   }
 
@@ -52,11 +59,14 @@
     padding: var(--pad-y) var(--pad-x);
     background: var(--paper);
     box-shadow: 0 2px 14px rgba(0,0,0,.18);
-    overflow: hidden;           /* keeps the sheet a true single A4 page */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;   /* spreads spare height between sections */
   }
 
   /* ---------- Header ---------- */
-  header { text-align: center; margin-bottom: 8pt; }
+  header { text-align: center; }
   h1 {
     margin: 0 0 3pt;
     font-size: 20pt;
@@ -69,29 +79,27 @@
   a { color: inherit; text-decoration: none; }
 
   /* ---------- Sections ---------- */
-  section { margin-top: 7pt; }
+  section { margin-top: 4pt; }
   h2 {
     margin: 0 0 4pt;
     padding-bottom: 1pt;
     border-bottom: .75pt solid var(--rule);
     font-size: 10pt;
     font-weight: 700;
-    text-transform: uppercase;  /* real capitals: small-caps garbles ATS text extraction */
+    text-transform: uppercase;
     letter-spacing: .06em;
     line-height: 1.3;
   }
 
-  /* left-aligned, no auto-hyphenation: keeps words whole for keyword scanners */
   .summary { margin: 0; text-align: left; hyphens: none; }
 
-  /* Entry = two rows: (organisation, location) and (role, dates) */
   .entry { margin-top: 5pt; }
   .entry:first-of-type { margin-top: 0; }
   .row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    gap: 12pt;
+    gap: 10pt;
   }
   .row .right { flex: none; text-align: right; }
   .org { font-weight: 700; }
@@ -104,14 +112,13 @@
   .detail { margin: 2pt 0 0; }
   .detail b { font-weight: 700; }
 
-  /* Skills block: label + comma-separated keywords, plain text */
-  .skills p { margin: 0 0 2pt; }
-  .skills b { font-weight: 700; }
+  .skills p, .emergency p { margin: 0 0 2pt; }
+  .skills b, .emergency b { font-weight: 700; }
 
   /* ---------- PRINT / SAVE AS PDF ---------- */
   @page {
     size: A4;
-    margin: 0;                  /* margins come from .sheet padding instead */
+    margin: 0;
   }
 
   @media print {
@@ -128,7 +135,7 @@
     }
     .sheet {
       margin: 0;
-      height: 296.5mm;          /* a hair under 297mm avoids a blank 2nd page */
+      height: 296.5mm;
       box-shadow: none;
       break-after: avoid;
       page-break-after: avoid;
@@ -147,14 +154,14 @@
   <!-- ============ HEADER ============ -->
   <header>
     <h1>David Paul Manaloto</h1>
-    <p class="contact">Dagupan City, Pangasinan, Philippines | +63 981 448 8196 | <a href="mailto:davidmanalotowork@gmail.com">davidmanalotowork@gmail.com</a></p>
-    <p class="contact">linkedin.com/in/david-manaloto | github.com/davidmanaloto</p>
+    <p class="contact">Dagupan City, Pangasinan, 2400 | +63 981 448 8196 | <a href="mailto:davidmanalotowork@gmail.com">davidmanalotowork@gmail.com</a></p>
+    <p class="contact">linkedin.com/in/david-manaloto | github.com/davidmanalotowork</p>
   </header>
 
   <!-- ============ PROFILE SUMMARY ============ -->
   <section aria-labelledby="h-summary">
     <h2 id="h-summary">Profile Summary</h2>
-    <p class="summary">An Information Technology student and software developer with demonstrated proficiency in developing modern business solutions using up-to-date technologies and best practices. Experienced in web app development and skilled in Python, ReactJS / React Native, and HTML. Familiar with backend core technologies like PHP, MySQL, and PostgreSQL. Diligent, resolute, and can work independently but works best with a team where ideas are shared and tested. Advocates accessible and inclusive IT education through involvement with various IT communities.</p>
+    <p class="summary">Information Technology student and software developer with hands-on experience building web applications and backend APIs with Python, Django, React, and PostgreSQL. Works well both independently and in teams. Highly flexible and adaptable to any given task.</p>
   </section>
 
   <!-- ============ EDUCATION ============ -->
@@ -170,7 +177,7 @@
         <span class="role">Bachelor of Science in Information Technology</span>
         <span class="right">2023 – Expected April 2027</span>
       </div>
-      <p class="detail"><b>Relevant coursework:</b> Data Structures and Algorithms, Database Systems, Machine Learning, Software Design, Statistics, Human-Computer Interaction.</p>
+      <p class="detail"><b>Relevant coursework:</b> Data Structures and Algorithms, Database Systems, Machine Learning, Software Design.</p>
     </div>
 
     <div class="entry">
@@ -195,11 +202,13 @@
         <span class="right">2025 – 2026</span>
       </div>
       <div class="row">
-        <span class="role">Junior Backend Developer, Researcher, and QA Engineer, 5-member team | React, Vite, Django, PostgreSQL</span>
+        <span class="role">Backend Developer, Researcher, QA Tester, 5-member team | React, Vite, Django, PostgreSQL</span>
       </div>
       <ul>
-        <li>Built a web-based platform for managing personal health identities and secure medical records in the Philippines.</li>
-        <li>Streamlined access to and updating of health information, ensuring data privacy and compliance compared to paper-based systems.</li>
+        <li>Built a web-based platform for managing personal health identities and secure medical records, replacing paper-based systems.</li>
+        <li>Lead researcher for the FHIR and HL7 implementation for the Philippine healthcare system.</li>
+        <li>Assisted in developing the platform's backend API endpoints using the HL7 and FHIR standards.</li>
+        <li>Conducted quality assurance testing to fit hospital requirements.</li>
       </ul>
     </div>
 
@@ -209,11 +218,12 @@
         <span class="right">2025</span>
       </div>
       <div class="row">
-        <span class="role">Lead Character Designer, Lead Character Animator, QA | Unity, Clip Studio, Adobe Photoshop, Blockchain</span>
+        <span class="role">Lead Character Designer, Lead Character Animator, QA Tester | Unity, Clip Studio, Adobe Photoshop, Blockchain</span>
       </div>
       <ul>
-        <li>Designed and animated characters.</li>
-        <li>Implemented blockchain technology for secure in-game asset purchase management.</li>
+        <li>Developed a rhythm game with blockchain integration for monetary transactions.</li>
+        <li>Led the character design and animation process for the game.</li>
+        <li>Conducted quality assurance testing for the game's visual and functional integrity.</li>
       </ul>
     </div>
 
@@ -223,11 +233,11 @@
         <span class="right">2024 – 2025</span>
       </div>
       <div class="row">
-        <span class="role">ML Developer, RAG Developer, Data Analyst | Python, FastAPI, Local LLM, RAG, RAGAS, ChromaDB, Power BI, Tableau, pandas, NumPy, scikit-learn</span>
+        <span class="role">ML Developer, RAG Developer | Python, FastAPI, Local LLM, RAG, RAGAS, ChromaDB, Power BI, Tableau, pandas, NumPy, scikit-learn</span>
       </div>
       <ul>
-        <li>Trained a machine learning model to predict patient readmissions.</li>
-        <li>Achieved 85% accuracy in identifying at-risk patients based on historical data.</li>
+        <li>Developed a machine learning model to predict patient readmissions from historical data, achieving 85% accuracy.</li>
+        <li>Developed and trained the model for the project.</li>
       </ul>
     </div>
 
@@ -240,7 +250,9 @@
         <span class="role">Researcher, QA, AI Developer, RAG Developer | Python, Django, Ollama, LangChain, Retrieval-Augmented Generation</span>
       </div>
       <ul>
-        <li>Developed a building management system with IoT integration, allowing real-time monitoring and control of building systems using a locally run DeepSeek model.</li>
+        <li>Developed a building management system with IoT integration for real-time monitoring and control of building systems, using a locally run DeepSeek model.</li>
+        <li>Researched the AI components and the RAG system structure and framework.</li>
+        <li>Assisted in developing the RAG system for the platform.</li>
       </ul>
     </div>
   </section>
@@ -250,7 +262,6 @@
     <h2 id="h-certs">Certifications</h2>
     <ul>
       <li>Certificate of Coursework Completion, Cloud Services Fundamentals | AWS Fundamentals | Zuitt | 2025</li>
-      <li>Certificate of Coursework Completion, CCNA Cisco Certified Network Associate | UPANG | 2024</li>
       <li>Certificate of Coursework Completion, Python Fundamentals Freshman | UPANG | 2023</li>
     </ul>
   </section>
@@ -259,9 +270,14 @@
   <section class="skills" aria-labelledby="h-skills">
     <h2 id="h-skills">Skills and Tools</h2>
     <p><b>Programming:</b> Python, SQL, JavaScript, HTML, CSS</p>
-    <p><b>Data and Analytics:</b> pandas, NumPy, scikit-learn, Power BI, Tableau, Microsoft Excel, Statistical Analysis, Data Visualization</p>
-    <p><b>Web and Tools:</b> React, React Native, Node.js, Django, FastAPI, Unity, PHP, PostgreSQL, MySQL, Git, GitHub, Figma, Ollama, LangChain, Microsoft 365, Google Workspace</p>
-    <p><b>Soft Skills:</b> Teamwork, Leadership, Problem Solving, Public Speaking, Time Management, Written Communication</p>
+    <p><b>Web and Tools:</b> React, React Native, Node.js, Django, FastAPI, Unity, PHP, PostgreSQL, MySQL, Git, GitHub, Figma, Ollama, LangChain</p>
+    <p><b>Data and ML (project exposure):</b> pandas, NumPy, scikit-learn, Power BI, Tableau, Microsoft Excel</p>
+  </section>
+
+  <!-- ============ EMERGENCY CONTACT ============ -->
+  <section class="emergency" aria-labelledby="h-emergency">
+    <h2 id="h-emergency">Emergency Contact</h2>
+    <p>Alma Manaloto | Parent | +63 907 148 4580</p>
   </section>
 
 </main>
